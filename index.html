@@ -12,345 +12,122 @@
     <link rel="stylesheet" href="/aknights417/css/韵系列.css" />
     <link rel="stylesheet" href="/aknights417/css/飙系列.css" />
     <style>
-      /* 移动端响应式样式 */
+      /* 移动端样式适配 */
       @media screen and (max-width: 768px) {
-        /* 导航栏响应式 */
+        /* 导航栏样式 */
+        nav {
+          position: fixed;
+          top: 0;
+          left: -100%;
+          width: 80%;
+          height: 100vh;
+          background-color: rgba(0, 0, 0, 0.9);
+          z-index: 1000;
+          transition: left 0.3s ease;
+        }
+        
+        nav.active {
+          left: 0;
+        }
+        
+        nav ul {
+          flex-direction: column;
+          padding-top: 60px;
+        }
+        
+        nav ul li {
+          margin: 10px 0;
+          width: 100%;
+          text-align: center;
+        }
+        
         .nav-toggle {
           display: block;
           position: fixed;
           top: 15px;
           right: 15px;
           z-index: 1001;
-          background: rgba(0, 0, 0, 0.8);
+          background-color: rgba(0, 0, 0, 0.7);
           color: white;
-          padding: 12px 15px;
           border: none;
-          border-radius: 8px;
-          cursor: pointer;
+          border-radius: 5px;
+          padding: 8px 12px;
           font-size: 20px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+          cursor: pointer;
         }
-
-        nav {
-          position: fixed;
-          top: 0;
-          left: -100%;
-          width: 85%;
-          height: 100vh;
-          background: rgba(0, 0, 0, 0.95);
-          transition: left 0.3s ease;
-          z-index: 1000;
-          backdrop-filter: blur(10px);
-        }
-
-        nav.active {
-          left: 0;
-          box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        nav ul {
-          flex-direction: column;
-          padding: 80px 25px;
-          height: 100%;
-        }
-
-        nav ul li {
-          margin: 15px 0;
-          width: 100%;
-          text-align: left;
-        }
-
-        nav ul li a {
-          display: block;
-          padding: 12px 15px;
-          font-size: 1.2rem;
-          color: #fff;
-          text-decoration: none;
-          border-radius: 8px;
-          transition: all 0.3s ease;
-          background: rgba(255, 255, 255, 0.1);
-        }
-
-        nav ul li a:hover {
-          background: rgba(255, 255, 255, 0.2);
-          transform: translateX(5px);
-        }
-
+        
         .search-container {
-          position: relative;
           width: 100%;
-          margin: 20px 0;
+          margin-top: 20px;
         }
-
+        
         .search-input {
-          width: 100%;
-          padding: 12px;
-          border: none;
-          border-radius: 8px;
-          background: rgba(255, 255, 255, 0.1);
-          color: #fff;
-          font-size: 1rem;
+          width: 70%;
         }
-
-        /* 首页轮播图响应式 */
-        #box {
-          min-height: 100vh;
-          padding: 60px 0 30px;
-          box-sizing: border-box;
+        
+        /* 内容区域样式 */
+        .content-wrapper {
+          padding: 10px;
         }
-
+        
+        h3 {
+          font-size: 24px;
+          margin-top: 60px;
+        }
+        
+        /* 轮播图样式调整 */
         .carousel-container {
           width: 100%;
           height: auto;
-          aspect-ratio: 16/9;
-          margin: 0 auto;
-          position: relative;
-          overflow: hidden;
-          border-radius: 12px;
-          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
-
-        .box-ul {
-          position: relative;
-          width: 100%;
-          height: 100%;
-          padding: 0;
-          margin: 0;
-          list-style: none;
-        }
-
-        .box-li {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          opacity: 0;
-          transition: opacity 0.5s ease;
-        }
-
-        .box-li.active {
-          opacity: 1;
-          z-index: 1;
-        }
-
+        
         .box-li img {
           width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 12px;
-        }
-
-        #left,
-        #right {
-          display: none;
-        }
-
-        /* 指示器样式优化 */
-        .indicators {
-          position: absolute;
-          bottom: 15px;
-          left: 50%;
-          transform: translateX(-50%);
-          display: flex;
-          gap: 8px;
-          z-index: 2;
-          background: rgba(0, 0, 0, 0.3);
-          padding: 8px 12px;
-          border-radius: 20px;
-        }
-
-        .indicator {
-          width: 8px;
-          height: 8px;
-          background: rgba(255, 255, 255, 0.5);
-          border-radius: 50%;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .indicator.active {
-          background: #fff;
-          transform: scale(1.2);
-        }
-
-        /* 各个系列的响应式布局 */
-        .section {
-          padding: 80px 15px 30px;
-          min-height: auto;
-          box-sizing: border-box;
-        }
-
-        .content-wrapper {
-          width: 100%;
-          max-width: 100%;
-          padding: 0;
-          margin: 0 auto;
-        }
-
-        /* 各个系列的轮播图样式 */
-        #sanhu-box,
-        #wuyi-box,
-        #yun-box,
-        #biao-box {
-          width: 100%;
           height: auto;
-          aspect-ratio: 16/9;
-          position: relative;
-          overflow: hidden;
-          border-radius: 12px;
-          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-          margin: 20px 0;
         }
-
-        #sanhu-box img,
-        #wuyi-box img,
-        #yun-box img,
-        #biao-box img {
-          position: absolute;
+        
+        /* 各系列布局调整 */
+        .sanhu-main, .wuyi-main, .yun-main, .biao-main {
+          flex-direction: column;
+        }
+        
+        .sanhu-section-left, .wuyi-section-left, .yun-section-left, .biao-section-left,
+        .sanhu-section-right, .wuyi-section-right, .yun-section-right, .biao-section-right {
           width: 100%;
-          height: 100%;
-          object-fit: cover;
-          opacity: 0;
-          transition: opacity 0.5s ease;
         }
-
-        #sanhu-box img.active,
-        #wuyi-box img.active,
-        #yun-box img.active,
-        #biao-box img.active {
-          opacity: 1;
-          z-index: 1;
-        }
-
-        /* 导航按钮样式 */
-        #sanhu-btns,
-        #wuyi-btns,
-        #yun-btns,
-        #biao-btns {
-          position: absolute;
-          bottom: 15px;
-          left: 50%;
-          transform: translateX(-50%);
-          display: flex;
-          gap: 8px;
-          z-index: 2;
-          background: rgba(0, 0, 0, 0.3);
-          padding: 8px 12px;
-          border-radius: 20px;
-        }
-
-        #sanhu-btns button,
-        #wuyi-btns button,
-        #yun-btns button,
-        #biao-btns button {
-          width: 8px;
-          height: 8px;
-          border: none;
-          border-radius: 50%;
-          background: rgba(255, 255, 255, 0.5);
-          cursor: pointer;
-          padding: 0;
-          font-size: 0;
-          transition: all 0.3s ease;
-        }
-
-        #sanhu-btns button.active,
-        #wuyi-btns button.active,
-        #yun-btns button.active,
-        #biao-btns button.active {
-          background: #fff;
-          transform: scale(1.2);
-        }
-
-        /* 内容区域样式 */
-        .sanhu-section-right,
-        .wuyi-section-right,
-        .yun-section-right,
-        .biao-section-right {
-          background: rgba(255, 255, 255, 0.95);
-          padding: 20px;
-          border-radius: 12px;
-          margin-top: 20px;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
+        
         /* 导航列表样式 */
-        .sanhu-nav-ul,
-        .wuyi-nav-ul,
-        .yun-nav-ul,
-        .biao-nav-ul {
+        .sanhu-nav-ul, .wuyi-nav-ul, .yun-nav-ul, .biao-nav-ul {
           display: flex;
           flex-wrap: wrap;
-          gap: 10px;
-          margin: 15px 0;
-          padding: 15px;
-          background: rgba(0, 0, 0, 0.7);
-          border-radius: 12px;
           justify-content: center;
         }
-
-        .sanhu-nav-li,
-        .wuyi-nav-li,
-        .yun-nav-li,
-        .biao-nav-li {
-          padding: 8px 15px;
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 6px;
-          color: white;
-          cursor: pointer;
-          transition: all 0.3s ease;
+        
+        .sanhu-nav-li, .wuyi-nav-li, .yun-nav-li, .biao-nav-li {
+          margin: 5px;
+          padding: 5px 10px;
         }
-
-        .sanhu-nav-li:hover,
-        .wuyi-nav-li:hover,
-        .yun-nav-li:hover,
-        .biao-nav-li:hover {
-          background: rgba(255, 255, 255, 0.2);
-          transform: translateY(-2px);
-        }
-
+        
         /* 图片展示区域 */
-        .sanhu-nav-cont,
-        .wuyi-nav-cont,
-        .yun-nav-cont,
-        .biao-nav-cont {
-          margin: 15px 0;
-        }
-
-        .sanhu-nav-cont img,
-        .wuyi-nav-cont img,
-        .yun-nav-cont img,
-        .biao-nav-cont img {
+        #sanhu-box, #wuyi-box, #yun-box, #biao-box {
           width: 100%;
           height: auto;
-          border-radius: 12px;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-          transition: transform 0.3s ease;
         }
-
-        .sanhu-nav-cont img:hover,
-        .wuyi-nav-cont img:hover,
-        .yun-nav-cont img:hover,
-        .biao-nav-cont img:hover {
-          transform: scale(1.02);
+        
+        #sanhu-box img, #wuyi-box img, #yun-box img, #biao-box img {
+          width: 100%;
+          height: auto;
         }
-      }
-
-      /* 平板设备响应式 */
-      @media screen and (min-width: 769px) and (max-width: 1024px) {
-        .content-wrapper {
-          width: 90%;
+        
+        /* 按钮样式 */
+        #sanhu-btns, #wuyi-btns, #yun-btns, #biao-btns {
+          bottom: 10px;
         }
-
-        .carousel-container {
-          width: 90%;
-        }
-
-        nav ul {
-          padding: 0 20px;
-        }
-
-        .section {
-          padding: 40px 0;
+        
+        #sanhu-btns button, #wuyi-btns button, #yun-btns button, #biao-btns button {
+          width: 25px;
+          height: 25px;
+          margin: 0 5px;
         }
       }
     </style>
@@ -621,7 +398,7 @@
           <div class="wuyi-section-right">
             <h4>巫异盛宴系列</h4>
             <p>
-              巫异盛宴系列以神秘的魔法世界为主题，将神秘主义与现代美学完美融合。每件时装都蕴含着独特的魔法元素，展现出非凡的设计魅力。
+              巫异盛宴系列以神秘的魔法世界为主题，将神秘主义与现代美学完美融合。每件时装都蕴含着独特的魔法元素，呈现出非凡的设计魅力。
             </p>
             <p>本系列特点：</p>
             <ul class="skin-list">
@@ -835,6 +612,26 @@
       document.write(
         '<script src="/aknights417/js/mobile-carousel.js"><\/script>'
       );
+      
+      // 添加导航栏切换功能
+      function toggleNav() {
+        const nav = document.querySelector('nav');
+        nav.classList.toggle('active');
+      }
+      
+      // 点击导航链接后关闭导航栏
+      document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+          document.querySelector('nav').classList.remove('active');
+        });
+      });
+      
+      // 检测屏幕尺寸变化，在大屏幕下重置导航栏状态
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+          document.querySelector('nav').classList.remove('active');
+        }
+      });
     </script>
   </body>
 </html>
