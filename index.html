@@ -18,80 +18,102 @@
         .nav-toggle {
           display: block;
           position: fixed;
-          top: 10px;
-          right: 10px;
+          top: 15px;
+          right: 15px;
           z-index: 1001;
-          background: rgba(0, 0, 0, 0.7);
+          background: rgba(0, 0, 0, 0.8);
           color: white;
-          padding: 10px;
+          padding: 12px 15px;
           border: none;
-          border-radius: 4px;
+          border-radius: 8px;
           cursor: pointer;
+          font-size: 20px;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         nav {
           position: fixed;
           top: 0;
           left: -100%;
-          width: 80%;
+          width: 85%;
           height: 100vh;
-          background: rgba(0, 0, 0, 0.9);
+          background: rgba(0, 0, 0, 0.95);
           transition: left 0.3s ease;
           z-index: 1000;
+          backdrop-filter: blur(10px);
         }
 
         nav.active {
           left: 0;
+          box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
         }
 
         nav ul {
           flex-direction: column;
-          padding: 60px 20px;
+          padding: 80px 25px;
           height: 100%;
         }
 
         nav ul li {
           margin: 15px 0;
           width: 100%;
-          text-align: center;
+          text-align: left;
         }
 
         nav ul li a {
           display: block;
-          padding: 10px;
+          padding: 12px 15px;
           font-size: 1.2rem;
+          color: #fff;
+          text-decoration: none;
+          border-radius: 8px;
+          transition: all 0.3s ease;
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        nav ul li a:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: translateX(5px);
         }
 
         .search-container {
           position: relative;
           width: 100%;
-          margin: 15px 0;
+          margin: 20px 0;
         }
 
         .search-input {
-          width: calc(100% - 20px);
-          padding: 10px;
+          width: 100%;
+          padding: 12px;
+          border: none;
+          border-radius: 8px;
+          background: rgba(255, 255, 255, 0.1);
+          color: #fff;
+          font-size: 1rem;
         }
 
         /* 首页轮播图响应式 */
         #box {
           min-height: 100vh;
-          display: flex;
-          align-items: center;
+          padding: 60px 0 30px;
+          box-sizing: border-box;
         }
 
         .carousel-container {
           width: 100%;
           height: auto;
-          padding: 0 15px;
-          box-sizing: border-box;
-          margin: 0;
+          aspect-ratio: 16/9;
+          margin: 0 auto;
+          position: relative;
+          overflow: hidden;
+          border-radius: 12px;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
         .box-ul {
           position: relative;
           width: 100%;
-          height: auto;
+          height: 100%;
           padding: 0;
           margin: 0;
           list-style: none;
@@ -100,22 +122,21 @@
         .box-li {
           position: absolute;
           width: 100%;
-          height: auto;
+          height: 100%;
           opacity: 0;
           transition: opacity 0.5s ease;
-          display: block;
         }
 
         .box-li.active {
           opacity: 1;
-          position: relative;
+          z-index: 1;
         }
 
         .box-li img {
           width: 100%;
-          height: auto;
-          border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          height: 100%;
+          object-fit: cover;
+          border-radius: 12px;
         }
 
         #left,
@@ -125,14 +146,16 @@
 
         /* 指示器样式优化 */
         .indicators {
-          position: relative;
-          bottom: 0;
-          width: 100%;
+          position: absolute;
+          bottom: 15px;
+          left: 50%;
+          transform: translateX(-50%);
           display: flex;
-          justify-content: center;
           gap: 8px;
-          margin-top: 15px;
-          padding: 10px 0;
+          z-index: 2;
+          background: rgba(0, 0, 0, 0.3);
+          padding: 8px 12px;
+          border-radius: 20px;
         }
 
         .indicator {
@@ -141,7 +164,7 @@
           background: rgba(255, 255, 255, 0.5);
           border-radius: 50%;
           cursor: pointer;
-          transition: background-color 0.3s ease;
+          transition: all 0.3s ease;
         }
 
         .indicator.active {
@@ -151,75 +174,138 @@
 
         /* 各个系列的响应式布局 */
         .section {
+          padding: 80px 15px 30px;
           min-height: auto;
-          height: auto;
-          padding: 70px 0 30px;
-          margin: 0;
-          overflow: visible;
+          box-sizing: border-box;
         }
 
         .content-wrapper {
           width: 100%;
-          padding: 15px;
-          box-sizing: border-box;
-          margin: 0;
-        }
-
-        .sanhu-section,
-        .wuyi-section,
-        .yun-section,
-        .biao-section {
-          min-height: auto;
-          padding-top: 70px;
-          margin-bottom: 30px;
-        }
-
-        .sanhu-main,
-        .wuyi-main,
-        .yun-main,
-        .biao-main {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-          padding: 15px;
-          box-sizing: border-box;
-          width: 100%;
-          margin: 0;
-        }
-
-        .sanhu-section-left,
-        .wuyi-section-left,
-        .yun-section-left,
-        .biao-section-left {
-          width: 100%;
-          margin: 0;
+          max-width: 100%;
           padding: 0;
+          margin: 0 auto;
+        }
+
+        /* 各个系列的轮播图样式 */
+        #sanhu-box,
+        #wuyi-box,
+        #yun-box,
+        #biao-box {
+          width: 100%;
+          height: auto;
+          aspect-ratio: 16/9;
+          position: relative;
+          overflow: hidden;
+          border-radius: 12px;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+          margin: 20px 0;
+        }
+
+        #sanhu-box img,
+        #wuyi-box img,
+        #yun-box img,
+        #biao-box img {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+        }
+
+        #sanhu-box img.active,
+        #wuyi-box img.active,
+        #yun-box img.active,
+        #biao-box img.active {
+          opacity: 1;
+          z-index: 1;
         }
 
         /* 导航按钮样式 */
+        #sanhu-btns,
+        #wuyi-btns,
+        #yun-btns,
+        #biao-btns {
+          position: absolute;
+          bottom: 15px;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          gap: 8px;
+          z-index: 2;
+          background: rgba(0, 0, 0, 0.3);
+          padding: 8px 12px;
+          border-radius: 20px;
+        }
+
+        #sanhu-btns button,
+        #wuyi-btns button,
+        #yun-btns button,
+        #biao-btns button {
+          width: 8px;
+          height: 8px;
+          border: none;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.5);
+          cursor: pointer;
+          padding: 0;
+          font-size: 0;
+          transition: all 0.3s ease;
+        }
+
+        #sanhu-btns button.active,
+        #wuyi-btns button.active,
+        #yun-btns button.active,
+        #biao-btns button.active {
+          background: #fff;
+          transform: scale(1.2);
+        }
+
+        /* 内容区域样式 */
+        .sanhu-section-right,
+        .wuyi-section-right,
+        .yun-section-right,
+        .biao-section-right {
+          background: rgba(255, 255, 255, 0.95);
+          padding: 20px;
+          border-radius: 12px;
+          margin-top: 20px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 导航列表样式 */
         .sanhu-nav-ul,
         .wuyi-nav-ul,
         .yun-nav-ul,
         .biao-nav-ul {
           display: flex;
           flex-wrap: wrap;
-          justify-content: center;
           gap: 10px;
-          padding: 10px;
-          margin-bottom: 20px;
+          margin: 15px 0;
+          padding: 15px;
           background: rgba(0, 0, 0, 0.7);
-          border-radius: 8px;
+          border-radius: 12px;
+          justify-content: center;
         }
 
         .sanhu-nav-li,
         .wuyi-nav-li,
         .yun-nav-li,
         .biao-nav-li {
-          margin: 5px;
           padding: 8px 15px;
           background: rgba(255, 255, 255, 0.1);
-          border-radius: 4px;
+          border-radius: 6px;
           color: white;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .sanhu-nav-li:hover,
+        .wuyi-nav-li:hover,
+        .yun-nav-li:hover,
+        .biao-nav-li:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: translateY(-2px);
         }
 
         /* 图片展示区域 */
@@ -227,9 +313,7 @@
         .wuyi-nav-cont,
         .yun-nav-cont,
         .biao-nav-cont {
-          width: 100%;
-          margin-bottom: 20px;
-          display: block;
+          margin: 15px 0;
         }
 
         .sanhu-nav-cont img,
@@ -238,187 +322,16 @@
         .biao-nav-cont img {
           width: 100%;
           height: auto;
-          max-height: none;
-          object-fit: contain;
-          border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-          margin-bottom: 15px;
+          border-radius: 12px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          transition: transform 0.3s ease;
         }
 
-        /* 轮播盒子样式 */
-        #sanhu-box,
-        #wuyi-box,
-        #yun-box,
-        #biao-box {
-          width: 100%;
-          height: auto;
-          position: relative;
-          overflow: hidden;
-          margin-top: 20px;
-        }
-
-        #sanhu-box img,
-        #wuyi-box img,
-        #yun-box img,
-        #biao-box img {
-          width: 100%;
-          height: auto;
-          display: none;
-        }
-
-        #sanhu-box img:first-child,
-        #wuyi-box img:first-child,
-        #yun-box img:first-child,
-        #biao-box img:first-child {
-          display: block;
-        }
-
-        /* 右侧介绍部分 */
-        .sanhu-section-right,
-        .wuyi-section-right,
-        .yun-section-right,
-        .biao-section-right {
-          width: 100%;
-          padding: 20px;
-          margin: 0;
-          background: rgba(255, 255, 255, 0.95);
-          border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* 标题样式 */
-        h3 {
-          font-size: 1.8rem;
-          margin: 20px 0;
-          text-align: center;
-          color: white;
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        h4 {
-          font-size: 1.4rem;
-          margin: 15px 0;
-          color: #333;
-        }
-
-        p {
-          font-size: 1rem;
-          line-height: 1.6;
-          color: #444;
-          margin: 10px 0;
-        }
-
-        .skin-list {
-          padding-left: 20px;
-        }
-
-        .skin-list li {
-          margin: 8px 0;
-          color: #555;
-        }
-
-        /* 背景样式 */
-        .parallax-bg {
-          position: fixed;
-          opacity: 0.8;
-          background-attachment: scroll;
-        }
-
-        /* 按钮样式 */
-        #sanhu-btns,
-        #wuyi-btns,
-        #yun-btns,
-        #biao-btns {
-          display: flex;
-          justify-content: center;
-          gap: 10px;
-          margin-top: 15px;
-        }
-
-        #sanhu-btns button,
-        #wuyi-btns button,
-        #yun-btns button,
-        #biao-btns button {
-          padding: 8px 15px;
-          border: none;
-          border-radius: 4px;
-          background: rgba(255, 255, 255, 0.8);
-          cursor: pointer;
-        }
-
-        /* 轮播图通用样式 */
-        .carousel-container,
-        #sanhu-box,
-        #wuyi-box,
-        #yun-box,
-        #biao-box {
-          width: 100%;
-          height: auto;
-          position: relative;
-          overflow: hidden;
-          margin: 0 0 20px 0;
-        }
-
-        .box-ul,
-        .section-carousel {
-          position: relative;
-          width: 100%;
-          padding: 0;
-          margin: 0;
-          list-style: none;
-        }
-
-        .box-li,
-        .carousel-item {
-          position: absolute;
-          width: 100%;
-          height: auto;
-          opacity: 0;
-          transition: opacity 0.5s ease;
-          display: block;
-        }
-
-        .box-li.active,
-        .carousel-item.active {
-          opacity: 1;
-          position: relative;
-        }
-
-        .box-li img,
-        .carousel-item img {
-          width: 100%;
-          height: auto;
-          border-radius: 8px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* 轮播指示器样式 */
-        .indicators,
-        .section-indicators {
-          position: relative;
-          bottom: 0;
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          gap: 8px;
-          margin: 15px 0;
-          padding: 10px 0;
-        }
-
-        .indicator,
-        .section-indicator {
-          width: 8px;
-          height: 8px;
-          background: rgba(255, 255, 255, 0.5);
-          border-radius: 50%;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .indicator.active,
-        .section-indicator.active {
-          background: #fff;
-          transform: scale(1.2);
+        .sanhu-nav-cont img:hover,
+        .wuyi-nav-cont img:hover,
+        .yun-nav-cont img:hover,
+        .biao-nav-cont img:hover {
+          transform: scale(1.02);
         }
       }
 
@@ -918,217 +831,10 @@
     <script src="/aknights417/js/韵系列.js"></script>
     <script src="/aknights417/js/飙系列.js"></script>
     <script>
-      // 定义IntersectionObserver的配置选项
-      const observerOptions = {
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
-      };
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            const section = entry.target.closest(".section");
-            if (section) {
-              const bg = section.querySelector(".parallax-bg");
-              if (bg) {
-                bg.style.opacity = entry.intersectionRatio.toString();
-                bg.classList.add("active");
-              }
-            }
-          } else {
-            const section = entry.target.closest(".section");
-            if (section) {
-              const bg = section.querySelector(".parallax-bg");
-              if (bg) {
-                bg.style.opacity = "0";
-                bg.classList.remove("active");
-              }
-            }
-          }
-        });
-      }, observerOptions);
-
-      document.querySelectorAll(".fade-in").forEach((element) => {
-        observer.observe(element);
-      });
-
-      // 优化的视差滚动效果
-      let lastScrollTop = 0;
-      const parallaxElements = document.querySelectorAll(".parallax-bg");
-
-      function handleParallax() {
-        const scrolled = window.pageYOffset;
-        const delta = scrolled - lastScrollTop;
-        lastScrollTop = scrolled;
-
-        parallaxElements.forEach((bg) => {
-          const section = bg.closest(".section");
-          if (!section) return;
-
-          const rect = section.getBoundingClientRect();
-          const inView = rect.top < window.innerHeight && rect.bottom > 0;
-
-          if (inView) {
-            const speed = 0.4; // 减小视差速度使其更自然
-            const yPos = rect.top * speed;
-            const scale = 1 + Math.abs(rect.top) / (window.innerHeight * 4); // 添加轻微缩放效果
-
-            // 使用transform3d得更好的性能
-            bg.style.transform = `translate3d(0, ${yPos}px, 0) scale(${scale})`;
-
-            // 计算不透明度，使过渡更平滑
-            const opacity = Math.max(
-              0,
-              Math.min(1, 1 - Math.abs(rect.top) / (window.innerHeight * 0.8))
-            );
-            bg.style.opacity = opacity;
-          }
-        });
-      }
-
-      // 使用requestAnimationFrame优化滚动性能
-      let ticking = false;
-      window.addEventListener("scroll", () => {
-        if (!ticking) {
-          window.requestAnimationFrame(() => {
-            handleParallax();
-            ticking = false;
-          });
-          ticking = true;
-        }
-      });
-
-      // 初始化时调用一次以设置初始位置
-      handleParallax();
-
-      function toggleNav() {
-        document.querySelector("nav").classList.toggle("active");
-      }
-
-      // 点击导航链接时关闭导航栏
-      document.querySelectorAll("nav a").forEach((link) => {
-        link.addEventListener("click", () => {
-          document.querySelector("nav").classList.remove("active");
-        });
-      });
-
-      // 点击页面其他区域时关闭导航栏
-      document.addEventListener("click", (e) => {
-        if (!e.target.closest("nav") && !e.target.closest(".nav-toggle")) {
-          document.querySelector("nav").classList.remove("active");
-        }
-      });
-
-      // 通用轮播图控制函数
-      function initCarousel(
-        containerSelector,
-        slideSelector,
-        indicatorSelector,
-        interval = 3000
-      ) {
-        const container = document.querySelector(containerSelector);
-        if (!container) return;
-
-        const slides = container.querySelectorAll(slideSelector);
-        const indicators = container.querySelectorAll(indicatorSelector);
-        let currentSlide = 0;
-        let intervalId;
-
-        // 初始化显示第一张图片
-        slides[0].classList.add("active");
-        if (indicators.length > 0) {
-          indicators[0].classList.add("active");
-        }
-
-        // 切换到指定幻灯片
-        function goToSlide(index) {
-          slides[currentSlide].classList.remove("active");
-          if (indicators.length > 0) {
-            indicators[currentSlide].classList.remove("active");
-          }
-          currentSlide = index;
-          slides[currentSlide].classList.add("active");
-          if (indicators.length > 0) {
-            indicators[currentSlide].classList.add("active");
-          }
-        }
-
-        // 设置指示器点击事件
-        indicators.forEach((indicator, index) => {
-          indicator.addEventListener("click", () => {
-            goToSlide(index);
-            resetInterval();
-          });
-        });
-
-        // 自动轮播
-        function startInterval() {
-          intervalId = setInterval(() => {
-            goToSlide((currentSlide + 1) % slides.length);
-          }, interval);
-        }
-
-        function resetInterval() {
-          clearInterval(intervalId);
-          startInterval();
-        }
-
-        // 添加触摸滑动支持
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        container.addEventListener("touchstart", (e) => {
-          touchStartX = e.touches[0].clientX;
-          clearInterval(intervalId); // 触摸时暂停自动轮播
-        });
-
-        container.addEventListener("touchend", (e) => {
-          touchEndX = e.changedTouches[0].clientX;
-          if (touchStartX - touchEndX > 50) {
-            // 向左滑动
-            goToSlide((currentSlide + 1) % slides.length);
-          } else if (touchEndX - touchStartX > 50) {
-            // 向右滑动
-            goToSlide((currentSlide - 1 + slides.length) % slides.length);
-          }
-          startInterval(); // 恢复自动轮播
-        });
-
-        // 开始自动轮播
-        startInterval();
-
-        // 页面不可见时暂停轮播
-        document.addEventListener("visibilitychange", () => {
-          if (document.hidden) {
-            clearInterval(intervalId);
-          } else {
-            startInterval();
-          }
-        });
-      }
-
-      // 页面加载完成后初始化所有轮播图
-      document.addEventListener("DOMContentLoaded", function () {
-        const isMobile = window.innerWidth <= 768;
-        if (isMobile) {
-          // 初始化首页轮播图
-          initCarousel(".carousel-container", ".box-li", ".indicator");
-
-          // 初始化珊瑚海岸轮播图
-          initCarousel("#sanhu-box", "img", "#sanhu-btns button");
-
-          // 初始化巫异盛宴轮播图
-          initCarousel("#wuyi-box", "img", "#wuyi-btns button");
-
-          // 初始化韵系列轮播图
-          initCarousel("#yun-box", "img", "#yun-btns button");
-
-          // 初始化飙系列轮播图
-          initCarousel("#biao-box", "img", "#biao-btns button");
-        }
-      });
+      // 将所有轮播图相关的JavaScript代码移到一个单独的文件中
+      document.write(
+        '<script src="/aknights417/js/mobile-carousel.js"><\/script>'
+      );
     </script>
   </body>
 </html>
