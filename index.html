@@ -15,32 +15,83 @@
       /* 移动端响应式样式 */
       @media screen and (max-width: 768px) {
         /* 导航栏响应式 */
+        .nav-toggle {
+          display: block;
+          position: fixed;
+          top: 10px;
+          right: 10px;
+          z-index: 1001;
+          background: rgba(0, 0, 0, 0.7);
+          color: white;
+          padding: 10px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        nav {
+          position: fixed;
+          top: 0;
+          left: -100%;
+          width: 80%;
+          height: 100vh;
+          background: rgba(0, 0, 0, 0.9);
+          transition: left 0.3s ease;
+          z-index: 1000;
+        }
+
+        nav.active {
+          left: 0;
+        }
+
         nav ul {
           flex-direction: column;
-          padding: 10px;
+          padding: 60px 20px;
+          height: 100%;
         }
 
         nav ul li {
-          margin: 5px 0;
+          margin: 15px 0;
+          width: 100%;
+          text-align: center;
+        }
+
+        nav ul li a {
+          display: block;
+          padding: 10px;
+          font-size: 1.2rem;
         }
 
         .search-container {
-          margin: 10px 0;
+          position: relative;
           width: 100%;
+          margin: 15px 0;
         }
 
         .search-input {
-          width: 70%;
-        }
-
-        /* 内容区域响应式 */
-        .content-wrapper {
+          width: calc(100% - 20px);
           padding: 10px;
         }
 
-        /* 轮播图响应式 */
+        /* 首页轮播图响应式 */
         .carousel-container {
-          width: 95%;
+          width: 100%;
+          height: auto;
+          overflow: hidden;
+        }
+
+        .box-ul {
+          display: block;
+          width: 100%;
+        }
+
+        .box-li {
+          width: 100%;
+          display: none;
+        }
+
+        .box-li:first-child {
+          display: block;
         }
 
         .box-li img {
@@ -48,24 +99,52 @@
           height: auto;
         }
 
+        #left,
+        #right {
+          display: none;
+        }
+
         /* 各个系列的响应式布局 */
+        .section {
+          height: auto;
+          min-height: 100vh;
+          padding: 80px 15px 30px;
+          box-sizing: border-box;
+        }
+
+        .content-wrapper {
+          padding: 0;
+          margin: 0;
+          width: 100%;
+        }
+
         .sanhu-main,
         .wuyi-main,
         .yun-main,
         .biao-main {
           flex-direction: column;
+          margin: 0;
+          padding: 0;
+          width: 100%;
         }
 
         .sanhu-section-left,
         .wuyi-section-left,
         .yun-section-left,
-        .biao-section-left,
+        .biao-section-left {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+
         .sanhu-section-right,
         .wuyi-section-right,
         .yun-section-right,
         .biao-section-right {
           width: 100%;
-          padding: 10px;
+          padding: 20px;
+          background: rgba(255, 255, 255, 0.9);
+          border-radius: 8px;
+          margin-top: 20px;
         }
 
         /* 导航按钮响应式 */
@@ -76,7 +155,10 @@
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
-          gap: 5px;
+          gap: 10px;
+          padding: 10px;
+          background: rgba(0, 0, 0, 0.7);
+          border-radius: 8px;
         }
 
         .sanhu-nav-li,
@@ -84,60 +166,66 @@
         .yun-nav-li,
         .biao-nav-li {
           margin: 5px;
-          padding: 5px 10px;
+          padding: 8px 15px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+          color: white;
         }
 
         /* 图片展示区域响应式 */
+        .sanhu-nav-cont,
+        .wuyi-nav-cont,
+        .yun-nav-cont,
+        .biao-nav-cont {
+          width: 100%;
+          margin-bottom: 15px;
+        }
+
         .sanhu-nav-cont img,
         .wuyi-nav-cont img,
         .yun-nav-cont img,
         .biao-nav-cont img {
           width: 100%;
           height: auto;
-        }
-
-        /* 轮播按钮响应式 */
-        #sanhu-btns,
-        #wuyi-btns,
-        #yun-btns,
-        #biao-btns {
-          display: flex;
-          justify-content: center;
-          gap: 5px;
-        }
-
-        #sanhu-btns button,
-        #wuyi-btns button,
-        #yun-btns button,
-        #biao-btns button {
-          padding: 5px 10px;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         /* 文字内容响应式 */
         h3 {
-          font-size: 1.5rem;
-          margin: 15px 0;
+          font-size: 1.8rem;
+          margin: 20px 0;
+          text-align: center;
+          color: white;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         h4 {
-          font-size: 1.2rem;
+          font-size: 1.4rem;
+          margin: 15px 0;
+          color: #333;
         }
 
         p {
           font-size: 1rem;
-          line-height: 1.5;
+          line-height: 1.6;
+          color: #444;
+          margin: 10px 0;
+        }
+
+        .skin-list {
+          padding-left: 20px;
+        }
+
+        .skin-list li {
+          margin: 8px 0;
+          color: #555;
         }
 
         /* 视差背景响应式 */
         .parallax-bg {
           background-attachment: scroll;
-        }
-
-        /* 区块高度响应式 */
-        .section {
-          height: auto;
-          min-height: 100vh;
-          padding: 60px 0;
+          opacity: 0.8;
         }
       }
 
@@ -162,6 +250,9 @@
     </style>
   </head>
   <body>
+    <!-- 添加导航栏切换按钮 -->
+    <button class="nav-toggle" onclick="toggleNav()">☰</button>
+
     <!-- 导航栏 -->
     <nav>
       <ul>
@@ -718,6 +809,24 @@
 
       // 初始化时调用一次以设置初始位置
       handleParallax();
+
+      function toggleNav() {
+        document.querySelector("nav").classList.toggle("active");
+      }
+
+      // 点击导航链接时关闭导航栏
+      document.querySelectorAll("nav a").forEach((link) => {
+        link.addEventListener("click", () => {
+          document.querySelector("nav").classList.remove("active");
+        });
+      });
+
+      // 点击页面其他区域时关闭导航栏
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest("nav") && !e.target.closest(".nav-toggle")) {
+          document.querySelector("nav").classList.remove("active");
+        }
+      });
     </script>
   </body>
 </html>
