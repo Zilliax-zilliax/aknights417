@@ -74,29 +74,48 @@
         }
 
         /* 首页轮播图响应式 */
+        #box {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+        }
+
         .carousel-container {
           width: 100%;
           height: auto;
-          overflow: hidden;
+          padding: 0 15px;
+          box-sizing: border-box;
+          margin: 0;
         }
 
         .box-ul {
-          display: block;
+          position: relative;
           width: 100%;
+          height: auto;
+          padding: 0;
+          margin: 0;
+          list-style: none;
         }
 
         .box-li {
+          position: absolute;
           width: 100%;
-          display: none;
+          height: auto;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+          display: block;
         }
 
-        .box-li:first-child {
-          display: block;
+        .box-li.active {
+          opacity: 1;
+          position: relative;
         }
 
         .box-li img {
           width: 100%;
           height: auto;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         #left,
@@ -104,28 +123,68 @@
           display: none;
         }
 
+        /* 指示器样式优化 */
+        .indicators {
+          position: relative;
+          bottom: 0;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+          margin-top: 15px;
+          padding: 10px 0;
+        }
+
+        .indicator {
+          width: 8px;
+          height: 8px;
+          background: rgba(255, 255, 255, 0.5);
+          border-radius: 50%;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+
+        .indicator.active {
+          background: #fff;
+          transform: scale(1.2);
+        }
+
         /* 各个系列的响应式布局 */
         .section {
+          min-height: auto;
           height: auto;
-          min-height: 100vh;
-          padding: 80px 15px 30px;
-          box-sizing: border-box;
+          padding: 70px 0 30px;
+          margin: 0;
+          overflow: visible;
         }
 
         .content-wrapper {
-          padding: 0;
-          margin: 0;
           width: 100%;
+          padding: 15px;
+          box-sizing: border-box;
+          margin: 0;
+        }
+
+        .sanhu-section,
+        .wuyi-section,
+        .yun-section,
+        .biao-section {
+          min-height: auto;
+          padding-top: 70px;
+          margin-bottom: 30px;
         }
 
         .sanhu-main,
         .wuyi-main,
         .yun-main,
         .biao-main {
+          display: flex;
           flex-direction: column;
-          margin: 0;
-          padding: 0;
+          gap: 20px;
+          padding: 15px;
+          box-sizing: border-box;
           width: 100%;
+          margin: 0;
         }
 
         .sanhu-section-left,
@@ -133,21 +192,11 @@
         .yun-section-left,
         .biao-section-left {
           width: 100%;
-          margin-bottom: 20px;
+          margin: 0;
+          padding: 0;
         }
 
-        .sanhu-section-right,
-        .wuyi-section-right,
-        .yun-section-right,
-        .biao-section-right {
-          width: 100%;
-          padding: 20px;
-          background: rgba(255, 255, 255, 0.9);
-          border-radius: 8px;
-          margin-top: 20px;
-        }
-
-        /* 导航按钮响应式 */
+        /* 导航按钮样式 */
         .sanhu-nav-ul,
         .wuyi-nav-ul,
         .yun-nav-ul,
@@ -157,6 +206,7 @@
           justify-content: center;
           gap: 10px;
           padding: 10px;
+          margin-bottom: 20px;
           background: rgba(0, 0, 0, 0.7);
           border-radius: 8px;
         }
@@ -172,13 +222,14 @@
           color: white;
         }
 
-        /* 图片展示区域响应式 */
+        /* 图片展示区域 */
         .sanhu-nav-cont,
         .wuyi-nav-cont,
         .yun-nav-cont,
         .biao-nav-cont {
           width: 100%;
-          margin-bottom: 15px;
+          margin-bottom: 20px;
+          display: block;
         }
 
         .sanhu-nav-cont img,
@@ -187,11 +238,55 @@
         .biao-nav-cont img {
           width: 100%;
           height: auto;
+          max-height: none;
+          object-fit: contain;
           border-radius: 8px;
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+          margin-bottom: 15px;
         }
 
-        /* 文字内容响应式 */
+        /* 轮播盒子样式 */
+        #sanhu-box,
+        #wuyi-box,
+        #yun-box,
+        #biao-box {
+          width: 100%;
+          height: auto;
+          position: relative;
+          overflow: hidden;
+          margin-top: 20px;
+        }
+
+        #sanhu-box img,
+        #wuyi-box img,
+        #yun-box img,
+        #biao-box img {
+          width: 100%;
+          height: auto;
+          display: none;
+        }
+
+        #sanhu-box img:first-child,
+        #wuyi-box img:first-child,
+        #yun-box img:first-child,
+        #biao-box img:first-child {
+          display: block;
+        }
+
+        /* 右侧介绍部分 */
+        .sanhu-section-right,
+        .wuyi-section-right,
+        .yun-section-right,
+        .biao-section-right {
+          width: 100%;
+          padding: 20px;
+          margin: 0;
+          background: rgba(255, 255, 255, 0.95);
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 标题样式 */
         h3 {
           font-size: 1.8rem;
           margin: 20px 0;
@@ -222,10 +317,33 @@
           color: #555;
         }
 
-        /* 视差背景响应式 */
+        /* 背景样式 */
         .parallax-bg {
-          background-attachment: scroll;
+          position: fixed;
           opacity: 0.8;
+          background-attachment: scroll;
+        }
+
+        /* 按钮样式 */
+        #sanhu-btns,
+        #wuyi-btns,
+        #yun-btns,
+        #biao-btns {
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+          margin-top: 15px;
+        }
+
+        #sanhu-btns button,
+        #wuyi-btns button,
+        #yun-btns button,
+        #biao-btns button {
+          padding: 8px 15px;
+          border: none;
+          border-radius: 4px;
+          background: rgba(255, 255, 255, 0.8);
+          cursor: pointer;
         }
       }
 
@@ -825,6 +943,71 @@
       document.addEventListener("click", (e) => {
         if (!e.target.closest("nav") && !e.target.closest(".nav-toggle")) {
           document.querySelector("nav").classList.remove("active");
+        }
+      });
+
+      // 添加移动端轮播图控制脚本
+      document.addEventListener("DOMContentLoaded", function () {
+        const isMobile = window.innerWidth <= 768;
+        if (isMobile) {
+          const slides = document.querySelectorAll(".box-li");
+          const indicators = document.querySelectorAll(".indicator");
+          let currentSlide = 0;
+
+          // 初始化显示第一张图片
+          slides[0].classList.add("active");
+
+          // 设置指示器点击事件
+          indicators.forEach((indicator, index) => {
+            indicator.addEventListener("click", () => {
+              slides[currentSlide].classList.remove("active");
+              indicators[currentSlide].classList.remove("active");
+              currentSlide = index;
+              slides[currentSlide].classList.add("active");
+              indicators[currentSlide].classList.add("active");
+            });
+          });
+
+          // 自动轮播
+          setInterval(() => {
+            slides[currentSlide].classList.remove("active");
+            indicators[currentSlide].classList.remove("active");
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add("active");
+            indicators[currentSlide].classList.add("active");
+          }, 3000);
+
+          // 添加触摸滑动支持
+          let touchStartX = 0;
+          let touchEndX = 0;
+
+          document
+            .querySelector(".carousel-container")
+            .addEventListener("touchstart", (e) => {
+              touchStartX = e.touches[0].clientX;
+            });
+
+          document
+            .querySelector(".carousel-container")
+            .addEventListener("touchend", (e) => {
+              touchEndX = e.changedTouches[0].clientX;
+              if (touchStartX - touchEndX > 50) {
+                // 向左滑动
+                slides[currentSlide].classList.remove("active");
+                indicators[currentSlide].classList.remove("active");
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add("active");
+                indicators[currentSlide].classList.add("active");
+              } else if (touchEndX - touchStartX > 50) {
+                // 向右滑动
+                slides[currentSlide].classList.remove("active");
+                indicators[currentSlide].classList.remove("active");
+                currentSlide =
+                  (currentSlide - 1 + slides.length) % slides.length;
+                slides[currentSlide].classList.add("active");
+                indicators[currentSlide].classList.add("active");
+              }
+            });
         }
       });
     </script>
