@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>明日方舟时装展示</title>
     <link rel="stylesheet" href="/aknights417/css/轮播.css" />
     <link rel="stylesheet" href="/aknights417/css/style.css" />
@@ -10,6 +11,155 @@
     <link rel="stylesheet" href="/aknights417/css/巫异盛宴.css" />
     <link rel="stylesheet" href="/aknights417/css/韵系列.css" />
     <link rel="stylesheet" href="/aknights417/css/飙系列.css" />
+    <style>
+      /* 移动端响应式样式 */
+      @media screen and (max-width: 768px) {
+        /* 导航栏响应式 */
+        nav ul {
+          flex-direction: column;
+          padding: 10px;
+        }
+
+        nav ul li {
+          margin: 5px 0;
+        }
+
+        .search-container {
+          margin: 10px 0;
+          width: 100%;
+        }
+
+        .search-input {
+          width: 70%;
+        }
+
+        /* 内容区域响应式 */
+        .content-wrapper {
+          padding: 10px;
+        }
+
+        /* 轮播图响应式 */
+        .carousel-container {
+          width: 95%;
+        }
+
+        .box-li img {
+          width: 100%;
+          height: auto;
+        }
+
+        /* 各个系列的响应式布局 */
+        .sanhu-main,
+        .wuyi-main,
+        .yun-main,
+        .biao-main {
+          flex-direction: column;
+        }
+
+        .sanhu-section-left,
+        .wuyi-section-left,
+        .yun-section-left,
+        .biao-section-left,
+        .sanhu-section-right,
+        .wuyi-section-right,
+        .yun-section-right,
+        .biao-section-right {
+          width: 100%;
+          padding: 10px;
+        }
+
+        /* 导航按钮响应式 */
+        .sanhu-nav-ul,
+        .wuyi-nav-ul,
+        .yun-nav-ul,
+        .biao-nav-ul {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 5px;
+        }
+
+        .sanhu-nav-li,
+        .wuyi-nav-li,
+        .yun-nav-li,
+        .biao-nav-li {
+          margin: 5px;
+          padding: 5px 10px;
+        }
+
+        /* 图片展示区域响应式 */
+        .sanhu-nav-cont img,
+        .wuyi-nav-cont img,
+        .yun-nav-cont img,
+        .biao-nav-cont img {
+          width: 100%;
+          height: auto;
+        }
+
+        /* 轮播按钮响应式 */
+        #sanhu-btns,
+        #wuyi-btns,
+        #yun-btns,
+        #biao-btns {
+          display: flex;
+          justify-content: center;
+          gap: 5px;
+        }
+
+        #sanhu-btns button,
+        #wuyi-btns button,
+        #yun-btns button,
+        #biao-btns button {
+          padding: 5px 10px;
+        }
+
+        /* 文字内容响应式 */
+        h3 {
+          font-size: 1.5rem;
+          margin: 15px 0;
+        }
+
+        h4 {
+          font-size: 1.2rem;
+        }
+
+        p {
+          font-size: 1rem;
+          line-height: 1.5;
+        }
+
+        /* 视差背景响应式 */
+        .parallax-bg {
+          background-attachment: scroll;
+        }
+
+        /* 区块高度响应式 */
+        .section {
+          height: auto;
+          min-height: 100vh;
+          padding: 60px 0;
+        }
+      }
+
+      /* 平板设备响应式 */
+      @media screen and (min-width: 769px) and (max-width: 1024px) {
+        .content-wrapper {
+          width: 90%;
+        }
+
+        .carousel-container {
+          width: 90%;
+        }
+
+        nav ul {
+          padding: 0 20px;
+        }
+
+        .section {
+          padding: 40px 0;
+        }
+      }
+    </style>
   </head>
   <body>
     <!-- 导航栏 -->
