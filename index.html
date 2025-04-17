@@ -345,6 +345,81 @@
           background: rgba(255, 255, 255, 0.8);
           cursor: pointer;
         }
+
+        /* 轮播图通用样式 */
+        .carousel-container,
+        #sanhu-box,
+        #wuyi-box,
+        #yun-box,
+        #biao-box {
+          width: 100%;
+          height: auto;
+          position: relative;
+          overflow: hidden;
+          margin: 0 0 20px 0;
+        }
+
+        .box-ul,
+        .section-carousel {
+          position: relative;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+          list-style: none;
+        }
+
+        .box-li,
+        .carousel-item {
+          position: absolute;
+          width: 100%;
+          height: auto;
+          opacity: 0;
+          transition: opacity 0.5s ease;
+          display: block;
+        }
+
+        .box-li.active,
+        .carousel-item.active {
+          opacity: 1;
+          position: relative;
+        }
+
+        .box-li img,
+        .carousel-item img {
+          width: 100%;
+          height: auto;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 轮播指示器样式 */
+        .indicators,
+        .section-indicators {
+          position: relative;
+          bottom: 0;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+          margin: 15px 0;
+          padding: 10px 0;
+        }
+
+        .indicator,
+        .section-indicator {
+          width: 8px;
+          height: 8px;
+          background: rgba(255, 255, 255, 0.5);
+          border-radius: 50%;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .indicator.active,
+        .section-indicator.active {
+          background: #fff;
+          transform: scale(1.2);
+        }
       }
 
       /* 平板设备响应式 */
@@ -946,68 +1021,112 @@
         }
       });
 
-      // 添加移动端轮播图控制脚本
+      // 通用轮播图控制函数
+      function initCarousel(
+        containerSelector,
+        slideSelector,
+        indicatorSelector,
+        interval = 3000
+      ) {
+        const container = document.querySelector(containerSelector);
+        if (!container) return;
+
+        const slides = container.querySelectorAll(slideSelector);
+        const indicators = container.querySelectorAll(indicatorSelector);
+        let currentSlide = 0;
+        let intervalId;
+
+        // 初始化显示第一张图片
+        slides[0].classList.add("active");
+        if (indicators.length > 0) {
+          indicators[0].classList.add("active");
+        }
+
+        // 切换到指定幻灯片
+        function goToSlide(index) {
+          slides[currentSlide].classList.remove("active");
+          if (indicators.length > 0) {
+            indicators[currentSlide].classList.remove("active");
+          }
+          currentSlide = index;
+          slides[currentSlide].classList.add("active");
+          if (indicators.length > 0) {
+            indicators[currentSlide].classList.add("active");
+          }
+        }
+
+        // 设置指示器点击事件
+        indicators.forEach((indicator, index) => {
+          indicator.addEventListener("click", () => {
+            goToSlide(index);
+            resetInterval();
+          });
+        });
+
+        // 自动轮播
+        function startInterval() {
+          intervalId = setInterval(() => {
+            goToSlide((currentSlide + 1) % slides.length);
+          }, interval);
+        }
+
+        function resetInterval() {
+          clearInterval(intervalId);
+          startInterval();
+        }
+
+        // 添加触摸滑动支持
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        container.addEventListener("touchstart", (e) => {
+          touchStartX = e.touches[0].clientX;
+          clearInterval(intervalId); // 触摸时暂停自动轮播
+        });
+
+        container.addEventListener("touchend", (e) => {
+          touchEndX = e.changedTouches[0].clientX;
+          if (touchStartX - touchEndX > 50) {
+            // 向左滑动
+            goToSlide((currentSlide + 1) % slides.length);
+          } else if (touchEndX - touchStartX > 50) {
+            // 向右滑动
+            goToSlide((currentSlide - 1 + slides.length) % slides.length);
+          }
+          startInterval(); // 恢复自动轮播
+        });
+
+        // 开始自动轮播
+        startInterval();
+
+        // 页面不可见时暂停轮播
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) {
+            clearInterval(intervalId);
+          } else {
+            startInterval();
+          }
+        });
+      }
+
+      // 页面加载完成后初始化所有轮播图
       document.addEventListener("DOMContentLoaded", function () {
         const isMobile = window.innerWidth <= 768;
         if (isMobile) {
-          const slides = document.querySelectorAll(".box-li");
-          const indicators = document.querySelectorAll(".indicator");
-          let currentSlide = 0;
+          // 初始化首页轮播图
+          initCarousel(".carousel-container", ".box-li", ".indicator");
 
-          // 初始化显示第一张图片
-          slides[0].classList.add("active");
+          // 初始化珊瑚海岸轮播图
+          initCarousel("#sanhu-box", "img", "#sanhu-btns button");
 
-          // 设置指示器点击事件
-          indicators.forEach((indicator, index) => {
-            indicator.addEventListener("click", () => {
-              slides[currentSlide].classList.remove("active");
-              indicators[currentSlide].classList.remove("active");
-              currentSlide = index;
-              slides[currentSlide].classList.add("active");
-              indicators[currentSlide].classList.add("active");
-            });
-          });
+          // 初始化巫异盛宴轮播图
+          initCarousel("#wuyi-box", "img", "#wuyi-btns button");
 
-          // 自动轮播
-          setInterval(() => {
-            slides[currentSlide].classList.remove("active");
-            indicators[currentSlide].classList.remove("active");
-            currentSlide = (currentSlide + 1) % slides.length;
-            slides[currentSlide].classList.add("active");
-            indicators[currentSlide].classList.add("active");
-          }, 3000);
+          // 初始化韵系列轮播图
+          initCarousel("#yun-box", "img", "#yun-btns button");
 
-          // 添加触摸滑动支持
-          let touchStartX = 0;
-          let touchEndX = 0;
-
-          document
-            .querySelector(".carousel-container")
-            .addEventListener("touchstart", (e) => {
-              touchStartX = e.touches[0].clientX;
-            });
-
-          document
-            .querySelector(".carousel-container")
-            .addEventListener("touchend", (e) => {
-              touchEndX = e.changedTouches[0].clientX;
-              if (touchStartX - touchEndX > 50) {
-                // 向左滑动
-                slides[currentSlide].classList.remove("active");
-                indicators[currentSlide].classList.remove("active");
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add("active");
-                indicators[currentSlide].classList.add("active");
-              } else if (touchEndX - touchStartX > 50) {
-                // 向右滑动
-                slides[currentSlide].classList.remove("active");
-                indicators[currentSlide].classList.remove("active");
-                currentSlide =
-                  (currentSlide - 1 + slides.length) % slides.length;
-                slides[currentSlide].classList.add("active");
-                indicators[currentSlide].classList.add("active");
-              }
-            });
+          // 初始化飙系列轮播图
+          initCarousel("#biao-box", "img", "#biao-btns button");
         }
       });
     </script>
