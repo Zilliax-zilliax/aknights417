@@ -49,7 +49,7 @@ body {
 }
 
 #box .parallax-bg {
-  background-image: url("/aknights417/img/场景_假日.png");
+  background-image: url("/aknights417/img/backgrounds/场景_假日.png");
   transform-origin: center center;
 }
 
@@ -58,7 +58,7 @@ body {
 }
 
 #sanhu .parallax-bg {
-  background-image: url("/aknights417/img/71vvjvd4u4rjbqe9l6amxf2b8nqejfv.png");
+  background-image: url("/aknights417/img/backgrounds/71vvjvd4u4rjbqe9l6amxf2b8nqejfv.png");
   transform-origin: center center;
 }
 
@@ -67,7 +67,7 @@ body {
 }
 
 #wuyi .parallax-bg {
-  background-image: url("/aknights417/img/lwlbhgu5gg6txehxzzfffhkx59dxa0u.png");
+  background-image: url("/aknights417/img/backgrounds/lwlbhgu5gg6txehxzzfffhkx59dxa0u.png");
   transform-origin: center center;
 }
 
@@ -76,7 +76,7 @@ body {
 }
 
 #yun .parallax-bg {
-  background-image: url("/aknights417/img/7egc0u4zeivqo7gsj9pico02xamme13.png");
+  background-image: url("/aknights417/img/backgrounds/7egc0u4zeivqo7gsj9pico02xamme13.png");
   transform-origin: center center;
 }
 
@@ -85,7 +85,7 @@ body {
 }
 
 #biao .parallax-bg {
-  background-image: url("/aknights417/img/qmrcnqri2c1rbyes58y9fj80jt9t5sr.png");
+  background-image: url("/aknights417/img/backgrounds/qmrcnqri2c1rbyes58y9fj80jt9t5sr.png");
   transform-origin: center center;
 }
 
